@@ -8,4 +8,8 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig([{
     extends: [...nextCoreWebVitals],
+}, {
+    rules: {
+        "no-console": 2
+    }
 }]);
