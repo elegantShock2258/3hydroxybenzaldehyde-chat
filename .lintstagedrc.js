@@ -2,15 +2,6 @@ module.exports = {
   // Type check TypeScript files
   "**/*.(ts|tsx)": () => "yarn tsc",
 
-  // Compile sass files
-  "**/*.(sass|scss)": (filenames) => [
-    `sass ${filenames
-      .map((e) => {
-        return `${e}:${e.replaceAll("sass", "css")}`;
-      })
-      .join(" ")}`,
-  ],
-
   // Lint & Prettify TS and JS files
   "**/*.(ts|tsx|js)": (filenames) => [
     //     `yarn eslint ${filenames.join(" ")}`,
