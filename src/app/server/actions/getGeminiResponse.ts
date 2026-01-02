@@ -4,6 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 let ai: GoogleGenAI | undefined = undefined;
 export async function getGeminiResponse(prompt: string) {
   return "im ai";
+  // TODO: make sure it retains context in every chat
   if (ai === undefined) {
     ai = new GoogleGenAI({});
   }

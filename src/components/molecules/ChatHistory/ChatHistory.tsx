@@ -1,4 +1,3 @@
-import { useHistory } from "@/app/hooks";
 import Markdown from "react-markdown";
 import styles from "./ChatHistory.module.sass";
 import { HistoryState } from "@/app/server/types/HistoryState";

@@ -2,7 +2,6 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import styles from "./PromptField.module.sass";
-import { useHistory } from "@/app/hooks";
 import { Dispatch, SetStateAction, useState } from "react";
 import { getGeminiResponse } from "@/app/server/actions/getGeminiResponse";
 import { HistoryState } from "@/app/server/types/HistoryState";
@@ -58,7 +57,6 @@ export default function PromptField({
             placeholder="enter message"
           />
           <Button onClick={sendPrompt} type="submit" disabled={loading}>
-            {" "}
             enter
           </Button>
           {loading && <>loading.....</>}
