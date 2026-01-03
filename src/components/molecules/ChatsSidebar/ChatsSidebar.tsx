@@ -31,7 +31,7 @@ export default function AppSidebar() {
                 <SidebarMenuItem key={i}>
                   <SidebarMenuButton asChild>
                     <Link href={`/chat/${item}`}>
-                      <span>{item}</span>
+                      <span>{history![item].title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

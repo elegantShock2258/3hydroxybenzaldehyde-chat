@@ -16,9 +16,11 @@ export default function ChatHistory({
 }) {
   return (
     <div className={styles.history}>
-      {/* TODO: if new chat have a simple bg encouraging user to chat */}
+      {/* TODO: if its a new chat have a simple bg encouraging user to chat */}
       {history![id] &&
-        history![id].map((s: Message, i: number) => {
+        history![id].messages &&
+        history![id].messages.map((s: Message, i: number) => {
+          // always pair of messages is inserted, so odd even is a simple way to go
           return i % 2 ? (
             <AIMessageCard key={i} message={s as AIMessage} />
           ) : (

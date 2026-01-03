@@ -8,6 +8,7 @@ import { HistoryState } from "@/app/server/types/HistoryState";
 import { AIMessage } from "@/app/server/types/AIMessage";
 import { ChatModels } from "@/app/server/types/ChatModels";
 import { UserPrompt } from "@/app/server/types/UserPrompt";
+import getTitleOfConversation from "@/app/server/actions/getTitleOfConversation";
 
 export default function PromptField({
   id,
@@ -29,7 +30,9 @@ export default function PromptField({
     setError(false);
     setLoading(true);
     try {
-      const prevMessages = history![id] ?? [];
+      if (history![id] === undefined)
+        history![id] = { messages: [], title: "" };
+      const prevMessages = history![id].messages ?? [];
       const userMessage: UserPrompt = { message: prompt };
 
       setPrompt("");
@@ -38,11 +41,18 @@ export default function PromptField({
       let res = await getGeminiResponse(prompt);
       const aiMessage: AIMessage = { message: `${res}`, model: model };
 
+      history![id].title =
+        history![id].title !== ""
+          ? history![id].title
+          : await getTitleOfConversation(history![id].messages);
       const updatedHistory = {
         ...history,
-        [id]: [...prevMessages, userMessage, aiMessage],
+        [id]: {
+          title: history![id].title,
+          messages: [...prevMessages, userMessage, aiMessage],
+        },
       };
-
+      console.log(updatedHistory);
       setHistory(updatedHistory);
     } catch (error: unknown) {
       setError(true);
