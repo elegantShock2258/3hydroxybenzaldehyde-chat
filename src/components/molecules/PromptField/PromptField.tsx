@@ -25,8 +25,8 @@ export default function PromptField({
   let [loading, setLoading] = useState<boolean>(false);
 
   async function sendPrompt(e: React.MouseEvent<HTMLButtonElement>) {
-    // disable send button
     e.preventDefault();
+    // disable send button
     setError(false);
     setLoading(true);
     try {
@@ -38,13 +38,22 @@ export default function PromptField({
       setPrompt("");
       const model: ChatModels = "gemini"; //TODO: add support for different models
 
-      let res = await getGeminiResponse(prompt);
+      let contextWindowLen = Math.max(
+        prevMessages.length - Number(process.env.CONTEXT_WINDOW) || 0,
+        0,
+      );
+
+      let contextWindow = prevMessages
+        .splice(0, contextWindowLen)
+        .map((s) => s.message);
+
+      let res = await getGeminiResponse(prompt, contextWindow);
       const aiMessage: AIMessage = { message: `${res}`, model: model };
 
       history![id].title =
         history![id].title !== ""
           ? history![id].title
-          : await getTitleOfConversation(history![id].messages);
+          : await getTitleOfConversation(userMessage.message);
       const updatedHistory = {
         ...history,
         [id]: {

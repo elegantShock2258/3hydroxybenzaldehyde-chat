@@ -22,10 +22,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <ChatsSidebar />
-          <main className="w-full h-full">
-            <SidebarTrigger />
-            {children}
-          </main>
+          <main className="w-full h-full">{children}</main>
         </Providers>
       </body>
     </html>

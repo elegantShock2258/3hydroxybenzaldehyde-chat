@@ -17,7 +17,9 @@ export default function ChatHistory({
   return (
     <div className={styles.history}>
       {/* TODO: if its a new chat have a simple bg encouraging user to chat */}
-      {history![id] &&
+      {!history![id] ? (
+        <div> start typing..</div>
+      ) : (
         history![id].messages &&
         history![id].messages.map((s: Message, i: number) => {
           // always pair of messages is inserted, so odd even is a simple way to go
@@ -26,7 +28,8 @@ export default function ChatHistory({
           ) : (
             <UserPromptCard key={i} prompt={s as UserPrompt} />
           );
-        })}
+        })
+      )}
     </div>
   );
 }
