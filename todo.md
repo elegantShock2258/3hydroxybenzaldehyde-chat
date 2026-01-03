@@ -1,5 +1,6 @@
 # What i want to:
 
+    export ai message as pdf
     have a sidebar for all the chats
     have convo context
     have a MVP chat
@@ -7,6 +8,8 @@
 
 # Additonal features:
 
+    export chat as pdfs
+    share chats
     have different modes, i.e generate images, write code and do usual stuff
     have canvas for live code writing and help
     let it analyse files

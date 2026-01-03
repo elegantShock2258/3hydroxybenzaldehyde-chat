@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.sass";
-import Providers from "./providers";
+import Providers from "./providers/providers";
 import ChatsSidebar from "@/components/molecules/ChatsSidebar/ChatsSidebar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 

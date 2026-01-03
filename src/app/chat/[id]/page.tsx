@@ -7,8 +7,7 @@ import { use, useState } from "react";
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   let chatId = use(params).id;
   let [error, setError] = useState<boolean>(false);
-
-  let [history, setHistory, clear] = useHistory();
+  let { history, setHistory } = useHistory()!;
 
   if (error) {
     alert("error");

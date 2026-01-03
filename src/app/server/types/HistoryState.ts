@@ -1,3 +1,5 @@
+import { Message } from "./Message";
+
 export type HistoryState = {
-  [id: string]: string[];
+  [id: string]: Message[];
 };

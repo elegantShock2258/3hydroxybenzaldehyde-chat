@@ -14,9 +14,10 @@ import {
 import { useHistory } from "@/hooks/use-history";
 import Link from "next/link";
 import { Separator } from "@radix-ui/react-separator";
+import { useContext } from "react";
 
 export default function AppSidebar() {
-  let [history] = useHistory();
+  let { history, setHistory, clear } = useHistory()!;
 
   return (
     <Sidebar variant="sidebar" collapsible="icon">

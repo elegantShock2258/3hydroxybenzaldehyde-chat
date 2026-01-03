@@ -5,6 +5,9 @@ import styles from "./PromptField.module.sass";
 import { Dispatch, SetStateAction, useState } from "react";
 import { getGeminiResponse } from "@/app/server/actions/getGeminiResponse";
 import { HistoryState } from "@/app/server/types/HistoryState";
+import { AIMessage } from "@/app/server/types/AIMessage";
+import { ChatModels } from "@/app/server/types/ChatModels";
+import { UserPrompt } from "@/app/server/types/UserPrompt";
 
 export default function PromptField({
   id,
@@ -27,14 +30,17 @@ export default function PromptField({
     setLoading(true);
     try {
       const prevMessages = history![id] ?? [];
-      const userMessage = prompt;
+      const userMessage: UserPrompt = { message: prompt };
 
       setPrompt("");
+      const model: ChatModels = "gemini"; //TODO: add support for different models
+
       let res = await getGeminiResponse(prompt);
+      const aiMessage: AIMessage = { message: `${res}`, model: model };
 
       const updatedHistory = {
         ...history,
-        [id]: [...prevMessages, userMessage, `${res}`],
+        [id]: [...prevMessages, userMessage, aiMessage],
       };
 
       setHistory(updatedHistory);
