@@ -9,6 +9,10 @@ import { AIMessage } from "@/app/server/types/AIMessage";
 import { ChatModels } from "@/app/server/types/ChatModels";
 import { UserPrompt } from "@/app/server/types/UserPrompt";
 import getTitleOfConversation from "@/app/server/actions/getTitleOfConversation";
+import { Input } from "@/components/ui/input";
+import { useSidebar } from "@/components/ui/sidebar";
+import { Spinner } from "@/components/ui/spinner";
+import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 
 export default function PromptField({
   id,
@@ -23,6 +27,7 @@ export default function PromptField({
 }) {
   let [prompt, setPrompt] = useState<string>("");
   let [loading, setLoading] = useState<boolean>(false);
+  let { open } = useSidebar();
 
   async function sendPrompt(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -61,7 +66,6 @@ export default function PromptField({
           messages: [...prevMessages, userMessage, aiMessage],
         },
       };
-      console.log(updatedHistory);
       setHistory(updatedHistory);
     } catch (error: unknown) {
       setError(true);
@@ -72,21 +76,27 @@ export default function PromptField({
   }
 
   return (
-    <>
-      <div className={`flex items-center justify-center ${styles.messageBar}`}>
-        <form>
-          <input
-            type="text"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
-            placeholder="enter message"
-          />
-          <Button onClick={sendPrompt} type="submit" disabled={loading}>
-            enter
-          </Button>
-          {loading && <>loading.....</>}
-        </form>
-      </div>
-    </>
+    <div
+      className={`flex items-center justify-center ${styles.messageBar} ${open && styles.shift}`}
+    >
+      <form className="w-full flex justify-center">
+        <Input
+          className="w-full"
+          type="text"
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          placeholder="enter message"
+        />
+        <Button
+          onClick={sendPrompt}
+          type="submit"
+          className={styles.button}
+          disabled={loading || prompt.trim() === ""}
+        >
+          enter
+        </Button>
+        {loading && <LoadingIndicator />}
+      </form>
+    </div>
   );
 }

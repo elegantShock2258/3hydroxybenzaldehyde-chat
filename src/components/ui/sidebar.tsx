@@ -298,7 +298,7 @@ const SidebarTrigger = React.forwardRef<
       {...props}
     >
       <Minidenticon username="CHATTTlkghilugilgHTHTHTHTHTHT" />
-      {open && <PanelLeft />}
+      {open && <PanelLeft color="white" />}
 
       <span className="sr-only">Toggle Sidebar</span>
     </Button>

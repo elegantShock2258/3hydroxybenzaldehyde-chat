@@ -8,10 +8,10 @@ export async function getGeminiResponse(
   contextWindow: string[],
 ) {
   return "im ai";
-  // TODO: make sure it retains context in every chat
   if (ai === undefined) {
     ai = new GoogleGenAI({});
   }
+  // for now just use the last 'n' messages, dont bother wasting api creds for summarizing everything
   const response = await ai!.models.generateContent({
     model: "gemini-2.5-flash",
     contents: [...contextWindow, prompt].join(" "),

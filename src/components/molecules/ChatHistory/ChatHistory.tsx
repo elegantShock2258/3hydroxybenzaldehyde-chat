@@ -6,7 +6,7 @@ import { Message } from "@/app/server/types/Message";
 import { AIMessage } from "@/app/server/types/AIMessage";
 import UserPromptCard from "../UserPromptCard/UserPromptCard";
 import { UserPrompt } from "@/app/server/types/UserPrompt";
-
+import { ScrollArea } from "@/components/ui/scroll-area";
 export default function ChatHistory({
   id,
   history,
@@ -20,15 +20,20 @@ export default function ChatHistory({
       {!history![id] ? (
         <div> start typing..</div>
       ) : (
-        history![id].messages &&
-        history![id].messages.map((s: Message, i: number) => {
-          // always pair of messages is inserted, so odd even is a simple way to go
-          return i % 2 ? (
-            <AIMessageCard key={i} message={s as AIMessage} />
-          ) : (
-            <UserPromptCard key={i} prompt={s as UserPrompt} />
-          );
-        })
+        history![id].messages && (
+          <ScrollArea className={`h-[90vh] w-full ${styles.scrollParent}`}>
+            <div className={styles.scrollParent}>
+              {history![id].messages.map((s: Message, i: number) => {
+                // always pair of messages is inserted, so odd even is a simple way to go
+                return i % 2 ? (
+                  <AIMessageCard key={i} message={s as AIMessage} />
+                ) : (
+                  <UserPromptCard key={i} prompt={s as UserPrompt} />
+                );
+              })}
+            </div>
+          </ScrollArea>
+        )
       )}
     </div>
   );

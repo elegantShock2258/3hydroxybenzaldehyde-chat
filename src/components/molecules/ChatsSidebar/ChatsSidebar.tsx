@@ -21,19 +21,23 @@ import Link from "next/link";
 import { Separator } from "@radix-ui/react-separator";
 import Minidenticong from "../MinIdentIcon/MinidentIcon";
 import Minidenticon from "../MinIdentIcon/MinidentIcon";
+import styles from "./ChatsSidebar.module.sass";
 
 export default function AppSidebar() {
   let { history, setHistory, clear } = useHistory()!;
   let { open } = useSidebar();
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon" className="h-full">
+    <Sidebar variant="sidebar" collapsible="icon" className="h-full ">
       <SidebarTrigger />
       <SidebarContent className="h-full flex flex-col gap-3">
+        <Separator />
         <SidebarGroup
           className={`p-1 flex flex-col items-start gap-3 ${open && "p-4"}`}
         >
-          <SidebarGroupLabel className="text-lg">Your Chats</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-lg press-start-2p">
+            Your Chats
+          </SidebarGroupLabel>
           <SidebarMenu>
             {Object.keys(history!).map((item, i) => (
               <SidebarMenuItem key={i}>
@@ -41,12 +45,16 @@ export default function AppSidebar() {
                   asChild
                   className="flex justify-start translate-x-[2.5px] items-center"
                 >
-                  <Link href={`/chat/${item}`} className="">
+                  <Link href={`/chat/${item}`} className={styles.chatTitle}>
                     <Minidenticon
                       username={item}
                       className="h-9 w-9 shrink-0 flex-0"
                     />
-                    {open && <span>{history![item].title}</span>}
+                    {open && (
+                      <span className="press-start-2p">
+                        {history![item].title}
+                      </span>
+                    )}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -54,7 +62,7 @@ export default function AppSidebar() {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter> hi</SidebarFooter>
+      {/* <SidebarFooter> auth</SidebarFooter> */}
     </Sidebar>
   );
 }

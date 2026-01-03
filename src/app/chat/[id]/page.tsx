@@ -3,6 +3,8 @@ import ChatHistory from "@/components/molecules/ChatHistory/ChatHistory";
 import PromptField from "@/components/molecules/PromptField/PromptField";
 import { useHistory } from "@/hooks/use-history";
 import { use, useState } from "react";
+import styles from "./chat.module.sass";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Page({ params }: { params: Promise<{ id: string }> }) {
   let chatId = use(params).id;
@@ -14,7 +16,9 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   }
 
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center">
+    <div
+      className={`h-full w-full flex flex-col items-center justify-center ${styles.parent}`}
+    >
       <ChatHistory id={chatId} history={history!} />
       <PromptField
         id={chatId}
