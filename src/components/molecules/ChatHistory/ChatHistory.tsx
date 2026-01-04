@@ -7,6 +7,7 @@ import { AIMessage } from "@/app/server/types/AIMessage";
 import UserPromptCard from "../UserPromptCard/UserPromptCard";
 import { UserPrompt } from "@/app/server/types/UserPrompt";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import NewChat from "../NewChat/NewChat";
 export default function ChatHistory({
   id,
   history,
@@ -18,7 +19,7 @@ export default function ChatHistory({
     <div className={styles.history}>
       {/* TODO: if its a new chat have a simple bg encouraging user to chat */}
       {!history![id] ? (
-        <div> start typing..</div>
+        <NewChat id={id} />
       ) : (
         history![id].messages && (
           <ScrollArea className={`h-[90vh] w-full ${styles.scrollParent}`}>

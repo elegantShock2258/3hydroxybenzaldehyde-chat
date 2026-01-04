@@ -4,7 +4,7 @@ import { ChatModels } from "../types/ChatModels";
 
 let ai: GoogleGenAI | undefined = undefined;
 export async function getGeminiResponse(prompt: string) {
-  // return prompt
+  return prompt;
   if (ai === undefined) {
     ai = new GoogleGenAI({});
   }

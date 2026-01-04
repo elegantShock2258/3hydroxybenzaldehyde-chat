@@ -2,7 +2,7 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import styles from "./PromptField.module.sass";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 import { getGeminiResponse } from "@/app/server/actions/getGeminiResponse";
 import { HistoryState } from "@/app/server/types/HistoryState";
 import { AIMessage } from "@/app/server/types/AIMessage";
@@ -11,6 +11,8 @@ import { UserPrompt } from "@/app/server/types/UserPrompt";
 import getTitleOfConversation from "@/app/server/actions/getTitleOfConversation";
 import { Input } from "@/components/ui/input";
 import { useSidebar } from "@/components/ui/sidebar";
+import { randomUrlSafeString } from "@/lib/utils";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 
 export default function PromptField({
   id,
@@ -23,15 +25,35 @@ export default function PromptField({
   setHistory: Dispatch<SetStateAction<HistoryState | undefined>>;
   setError: Dispatch<SetStateAction<boolean>>;
 }) {
-  let [prompt, setPrompt] = useState<string>("");
+  const searchParams = useSearchParams();
+  let [prompt, setPrompt] = useState<string>(searchParams.get("prompt") || "");
   let [loading, setLoading] = useState<boolean>(false);
   let { open } = useSidebar();
+  const didAutoSend = useRef(false);
+  let router = useRouter();
 
-  async function sendPrompt(e: React.MouseEvent<HTMLButtonElement>) {
-    e.preventDefault();
+  useEffect(() => {
+    if (
+      searchParams.get("status") === "new" &&
+      prompt &&
+      !didAutoSend.current
+    ) {
+      didAutoSend.current = true;
+      sendPrompt();
+    }
+  }, [searchParams]);
+
+  async function sendPrompt(e?: React.MouseEvent<HTMLButtonElement>) {
+    if (e) e.preventDefault();
     // disable send button
     setError(false);
     setLoading(true);
+
+    if (id === undefined) {
+      id = randomUrlSafeString();
+      router.push(`/chat/${id}?prompt=${prompt}&status=new`);
+    }
+
     try {
       if (history![id] === undefined)
         history![id] = { messages: [], title: "" };
