@@ -77,7 +77,7 @@ export default function PromptField({
 
   return (
     <div
-      className={`flex items-center justify-center ${styles.messageBar} ${open && styles.shift}`}
+      className={`flex items-center justify-center ${styles.messageBar} ${open && styles.shift}  ${loading && styles.loadingAnimation}`}
     >
       <form className="w-full flex justify-center">
         <Input
@@ -86,6 +86,8 @@ export default function PromptField({
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder="enter message"
+          disabled={loading}
+          autoFocus
         />
         <Button
           onClick={sendPrompt}
@@ -95,7 +97,6 @@ export default function PromptField({
         >
           enter
         </Button>
-        {loading && <LoadingIndicator />}
       </form>
     </div>
   );

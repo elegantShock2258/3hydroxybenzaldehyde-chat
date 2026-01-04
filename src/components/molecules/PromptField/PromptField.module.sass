@@ -1,15 +1,74 @@
 .messageBar
+    overflow: hidden
     position: sticky
     right: 50%
     transform: translateX(60%)
     bottom: 5%
     width: 30vw
+    padding: 5px
+
     input
+        &:disabled
+            opacity:1
         font-size: 1.5rem
         width: 100%
         background-color: black
-        border: 2px solid white
+        caret-width: 10px
+        border: none
+
+    // workaround for SOLID WHITE border :/
+    &::before
+        content: ''
+        display: block
+        background: white
+        width: calc(220% * 1)
+        padding-bottom: calc(200% )
+        position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-50%, -50%)
+        z-index: -2
 .button
     font-size: 1.5rem
+    background-color: white
+    color: black
+    &:disabled
+            opacity:1
+    &:hover
+        background-color: black
+        color: white
+
 .shift
     transform: translateX(75%)
+
+.loadingAnimation
+    --border-size: 5px
+    --border-bg: conic-gradient(red, yellow, lime, aqua, blue, magenta, red)
+
+    &::before
+        content: ''
+        display: block
+        background: var(--border-bg)
+        width: calc(220% * 1)
+        padding-bottom: calc(200% )
+        position: absolute
+        left: 50%
+        top: 50%
+        transform: translate(-50%, -50%)
+        z-index: -2
+        animation: spin 2s linear infinite
+
+    &--reverse::before
+        animation-direction: reverse
+    &::after
+        content: ''
+        position: absolute
+        inset: var(--border-size)
+        background: white
+        z-index: -1
+
+@keyframes spin
+    from
+        transform: translate(-50%, -50%) rotate(0)
+    to
+        transform: translate(-50%, -50%) rotate(360deg)
