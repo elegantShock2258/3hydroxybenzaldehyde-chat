@@ -2,12 +2,18 @@
 @tailwind components
 @tailwind utilities
 
+@import url('https://fonts.googleapis.com/css2?family=Jersey+20&family=Press+Start+2P&family=Roboto+Mono&display=swap')
 
-@import url('https://fonts.googleapis.com/css2?family=Jersey+20&family=Press+Start+2P&display=swap')
 html,body
   width: 100vw
   height: 100vh
   background-color: black
+
+*
+  font-family: "Jersey 20", sans-serif
+  font-weight: 400
+  font-style: normal
+
 @layer base
   :root
     --sidebar-background: transparent
@@ -39,10 +45,6 @@ button[data-sidebar="trigger"] svg
 button[data-sidebar="menu-button"] svg
   padding: 10px !important
 
-*
-  font-family: "Jersey 20", sans-serif
-  font-weight: 400
-  font-style: normal
 .press-start-2p
   font-family: "Press Start 2P", system-ui
   font-weight: 400
@@ -54,3 +56,81 @@ button[data-sidebar="menu-button"] svg
 
   body
     @apply bg-background text-foreground
+
+// anim begin
+
+$retro-bg: #0b0b0b
+$cyan: #00fff9
+$magenta: #ff00c8
+$yellow: #f8ff00
+
+.retro-glitch
+  position: relative
+  font-family: 'Press Start 2P', monospace
+  font-size: 4rem
+  color: white
+  background: $retro-bg
+  padding: 1rem 2rem
+  text-transform: uppercase
+  letter-spacing: 0.15em
+
+  text-shadow: 2px 0 $cyan, -2px 0 $magenta, 0 2px $yellow
+
+  &::before,
+  &::after
+    content: attr(data-text)
+    position: absolute
+    inset: 0
+    pointer-events: none
+
+  &::before
+    color: $magenta
+    z-index: -1
+    clip-path: inset(0 0 0 0)
+    animation: glitch-1 2s infinite steps(2, end)
+
+  &::after
+    color: $cyan
+    z-index: -2
+    clip-path: inset(0 0 0 0)
+    animation: glitch-2 1.5s infinite steps(2, end)
+
+@keyframes glitch-1
+  0%
+    transform: translate(0)
+    clip-path: inset(10% 0 85% 0)
+  20%
+    transform: translate(-3px, -2px)
+    clip-path: inset(40% 0 43% 0)
+  40%
+    transform: translate(3px, 2px)
+    clip-path: inset(70% 0 15% 0)
+  60%
+    transform: translate(-2px, 1px)
+    clip-path: inset(20% 0 60% 0)
+  80%
+    transform: translate(2px, -1px)
+    clip-path: inset(50% 0 30% 0)
+  100%
+    transform: translate(0)
+    clip-path: inset(0)
+
+@keyframes glitch-2
+  0%
+    transform: translate(0)
+    clip-path: inset(80% 0 5% 0)
+  20%
+    transform: translate(2px, 1px)
+    clip-path: inset(10% 0 80% 0)
+  40%
+    transform: translate(-2px, -1px)
+    clip-path: inset(60% 0 25% 0)
+  60%
+    transform: translate(3px, 0)
+    clip-path: inset(30% 0 55% 0)
+  80%
+    transform: translate(-1px, 2px)
+    clip-path: inset(45% 0 35% 0)
+  100%
+    transform: translate(0)
+    clip-path: inset(0)

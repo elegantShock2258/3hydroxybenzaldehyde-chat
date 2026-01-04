@@ -11,8 +11,6 @@ import { UserPrompt } from "@/app/server/types/UserPrompt";
 import getTitleOfConversation from "@/app/server/actions/getTitleOfConversation";
 import { Input } from "@/components/ui/input";
 import { useSidebar } from "@/components/ui/sidebar";
-import { Spinner } from "@/components/ui/spinner";
-import LoadingIndicator from "../LoadingIndicator/LoadingIndicator";
 
 export default function PromptField({
   id,
@@ -43,16 +41,16 @@ export default function PromptField({
       setPrompt("");
       const model: ChatModels = "gemini"; //TODO: add support for different models
 
-      let contextWindowLen = Math.max(
-        prevMessages.length - Number(process.env.CONTEXT_WINDOW) || 0,
-        0,
-      );
+      let contextWindowLen =
+        Number(process.env.NEXT_PUBLIC_CONTEXT_WINDOW) || 0;
 
+      console.log(contextWindowLen);
       let contextWindow = prevMessages
-        .splice(0, contextWindowLen)
-        .map((s) => s.message);
+        .slice(-contextWindowLen)
+        .map((s, i) => `${i % 2 === 0 ? "User: " : "AI: "} ${s.message}`)
+        .join(" ");
 
-      let res = await getGeminiResponse(prompt, contextWindow);
+      let res = await getGeminiResponse(`${contextWindow} User: ${prompt}`);
       const aiMessage: AIMessage = { message: `${res}`, model: model };
 
       history![id].title =

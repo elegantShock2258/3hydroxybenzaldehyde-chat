@@ -22,13 +22,14 @@ import { Separator } from "@radix-ui/react-separator";
 import Minidenticong from "../MinIdentIcon/MinidentIcon";
 import Minidenticon from "../MinIdentIcon/MinidentIcon";
 import styles from "./ChatsSidebar.module.sass";
+import Markdown from "react-markdown";
 
 export default function AppSidebar() {
   let { history, setHistory, clear } = useHistory()!;
   let { open } = useSidebar();
 
   return (
-    <Sidebar variant="sidebar" collapsible="icon" className="h-full ">
+    <Sidebar variant="sidebar" collapsible="icon" className="h-full w-[20vw]">
       <SidebarTrigger />
       <SidebarContent className="h-full flex flex-col gap-3">
         <Separator />
