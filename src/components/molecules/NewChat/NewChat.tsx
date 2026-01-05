@@ -1,9 +1,15 @@
 import styles from "./NewChat.module.sass";
 
-export default function NewChat({ id }: { id?: string }) {
+export default function NewChat({
+  id,
+  loading,
+}: {
+  id?: string;
+  loading: boolean;
+}) {
   return (
     <div className={styles.parent}>
-      {id ? (
+      {id && !loading ? (
         <h1>
           Oops! This link is invalid!, You can start typing to initiate a chat
         </h1>

@@ -4,9 +4,12 @@ import { ChatModels } from "../types/ChatModels";
 
 let ai: GoogleGenAI | undefined = undefined;
 export async function getGeminiResponse(prompt: string) {
-  /* for testing so api limits arent exhausted
-  // return prompt;
-  */
+  if (process.env.USE_API) {
+    // for testing so api limits arent exhausted
+    await new Promise((r) => setTimeout(r, 1000));
+    return prompt;
+  }
+
   if (ai === undefined) {
     ai = new GoogleGenAI({});
   }
