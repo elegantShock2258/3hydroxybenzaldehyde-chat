@@ -69,7 +69,6 @@ export default function PromptField({
       let contextWindowLen =
         Number(process.env.NEXT_PUBLIC_CONTEXT_WINDOW) || 0;
 
-      console.log(contextWindowLen);
       let contextWindow = prevMessages
         .slice(-contextWindowLen)
         .map((s, i) => `${i % 2 === 0 ? "User: " : "AI: "} ${s.message}`)
