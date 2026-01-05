@@ -15,8 +15,7 @@ export default function Page() {
           username="CHATTTlkghilugilgHTHTHTHTHTHT"
         />
         <div className="h-full flex items-center justify-center press-start-2p">
-          {" "}
-          Start Chat{" "}
+          Start Chat
         </div>
       </button>
     </div>
