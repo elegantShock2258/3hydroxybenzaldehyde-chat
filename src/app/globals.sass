@@ -2,8 +2,57 @@
 @tailwind components
 @tailwind utilities
 
+@import url('https://fonts.googleapis.com/css2?family=Jersey+20&family=Press+Start+2P&family=Roboto+Mono&display=swap')
+
 html,body
-    width: 100vw
-    height: 100vh
-    background-color: black
+  width: 100vw
+  height: 100vh
+  background-color: black
+
+*
+  font-family: "Jersey 20", sans-serif
+  font-weight: 400
+  font-style: normal
+
+@layer base
+  :root
+    --sidebar-background: transparent
+    --sidebar-foreground: 240 5.3% 26.1%
+    --sidebar-primary: white
     color: white
+    --sidebar-primary-foreground: 0 0% 98%
+    --sidebar-accent: 240 4.8% 95.9%
+    --sidebar-accent-foreground: 240 5.9% 10%
+    --sidebar-border: 220 13% 91%
+    --sidebar-ring: 217.2 91.2% 59.8%
+
+  .dark
+    --sidebar-background: transparent
+    --sidebar-foreground: transparent
+    --sidebar-primary: 224.3 76.3% 48%
+    --sidebar-primary-foreground: 0 0% 100%
+    --sidebar-accent: 240 3.7% 15.9%
+    --sidebar-accent-foreground: 240 4.8% 95.9%
+    --sidebar-border: 240 3.7% 15.9%
+    --sidebar-ring: 217.2 91.2% 59.8%
+
+button[data-sidebar="trigger"] svg
+  height: 30px !important
+  width: 30px !important
+  box-sizing: content-box
+
+  padding: 10px
+button[data-sidebar="menu-button"] svg
+  padding: 10px !important
+
+.press-start-2p
+  font-family: "Press Start 2P", system-ui
+  font-weight: 400
+  font-style: normal
+
+@layer base
+  *
+    @apply border-border
+
+  body
+    @apply bg-background text-foreground
