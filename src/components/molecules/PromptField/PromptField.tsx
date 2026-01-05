@@ -95,6 +95,9 @@ export default function PromptField({
       toast.error(`An error occurred: ${(error as Error).message}`);
     } finally {
       setLoading(false);
+      document
+        .getElementById("chat-end")!
+        .scrollIntoView({ behavior: "smooth" });
     }
   }
 

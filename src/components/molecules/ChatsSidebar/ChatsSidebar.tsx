@@ -84,7 +84,7 @@ export default function AppSidebar() {
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      {/* <SidebarFooter> auth</SidebarFooter> */}
+      {/* TODO: <SidebarFooter> auth</SidebarFooter> */}
     </Sidebar>
   );
 }

@@ -4,6 +4,7 @@ import "./globals.sass";
 import Providers from "./providers/providers";
 import ChatsSidebar from "@/components/molecules/ChatsSidebar/ChatsSidebar";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import Toolbar from "@/components/molecules/Toolbar/Toolbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Providers>
           <ChatsSidebar />
-          <div className="w-full h-[100vh]">{children}</div>
+          <div className="w-full h-[100vh] overflow-hidden">{children}</div>
         </Providers>
       </body>
     </html>

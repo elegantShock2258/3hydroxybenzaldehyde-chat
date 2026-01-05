@@ -295,7 +295,7 @@ const SidebarTrigger = React.forwardRef<
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
-        router.push("/");
+        // router.push("/");
       }}
       {...props}
     >

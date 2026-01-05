@@ -4,7 +4,7 @@ import { ChatModels } from "../types/ChatModels";
 
 let ai: GoogleGenAI | undefined = undefined;
 export async function getGeminiResponse(prompt: string) {
-  if (process.env.USE_API) {
+  if (process.env.USE_API === "true") {
     // for testing so api limits arent exhausted
     await new Promise((r) => setTimeout(r, 1000));
     return prompt;
