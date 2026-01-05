@@ -1,4 +1,4 @@
-# What i want to:
+# What i want to
 
     export ai message as pdf
     have a sidebar for all the chats
@@ -6,7 +6,7 @@
     have a MVP chat
     storing chats on local
 
-# Additonal features:
+# Additonal features
 
     export chat as pdfs
     share chats
@@ -18,11 +18,15 @@
     audio input asw
     different types of AI, like how different GPTs exist
 
-ui: https://dribbble.com/shots/23194216-Jet-Ai-Chat-Bot-Exploration
-
 / will be landing, prompting user to enter something
 
 then
-/chat/[id] will be the individual chat, with id as a uuid for the chat so history and all can be saved
+[x] /chat/[id] will be the individual chat, with id as a uuid for the chat so history and all can be saved
 
 the chat history and everything will be stored in local
+
+do:
+
+1. landing
+2. redirect the main icon to /chat
+3. make a navbar or smth showing the entire title

@@ -43,8 +43,10 @@ export default function PromptField({
     }
   }, [searchParams]);
 
-  async function sendPrompt(e?: React.MouseEvent<HTMLButtonElement>) {
-    if (e) e.preventDefault();
+  async function sendPrompt(e?: React.FormEvent) {
+    if (e) {
+      e.preventDefault();
+    }
     // disable send button
     setError(false);
     setLoading(true);
@@ -52,6 +54,7 @@ export default function PromptField({
     if (id === undefined) {
       id = randomUrlSafeString();
       router.push(`/chat/${id}?prompt=${prompt}&status=new`);
+      return;
     }
 
     try {
@@ -99,7 +102,7 @@ export default function PromptField({
     <div
       className={`flex items-center justify-center ${styles.messageBar} ${open && styles.shift}  ${loading && styles.loadingAnimation}`}
     >
-      <form className="w-full flex justify-center">
+      <form className="w-full flex justify-center" onSubmit={sendPrompt}>
         <Input
           className="w-full"
           type="text"
@@ -110,7 +113,6 @@ export default function PromptField({
           autoFocus
         />
         <Button
-          onClick={sendPrompt}
           type="submit"
           className={styles.button}
           disabled={loading || prompt.trim() === ""}

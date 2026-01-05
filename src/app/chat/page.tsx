@@ -11,10 +11,6 @@ export default function Page({ params }: { params: Promise<{ id: string }> }) {
   let [error, setError] = useState<boolean>(false);
   let { history, setHistory } = useHistory()!;
 
-  if (error) {
-    alert("error");
-  }
-
   return (
     <div
       className={`h-full w-full flex flex-col items-center justify-center ${styles.parent}`}
