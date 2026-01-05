@@ -25,6 +25,7 @@ import {
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import Minidenticon from "../molecules/MinIdentIcon/MinidentIcon";
+import { useRouter } from "next/navigation";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -283,7 +284,7 @@ const SidebarTrigger = React.forwardRef<
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
   const { open, toggleSidebar } = useSidebar();
-
+  const router = useRouter();
   return (
     <Button
       ref={ref}
@@ -294,6 +295,7 @@ const SidebarTrigger = React.forwardRef<
       onClick={(event) => {
         onClick?.(event);
         toggleSidebar();
+        router.push("/");
       }}
       {...props}
     >
