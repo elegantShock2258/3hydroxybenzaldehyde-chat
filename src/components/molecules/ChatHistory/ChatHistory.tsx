@@ -19,7 +19,7 @@ export default function ChatHistory({
     <div className={styles.history}>
       {/* TODO: if its a new chat have a simple bg encouraging user to chat */}
       {!history![id] ? (
-        <NewChat id={id} loading={history![id] === undefined} />
+        <NewChat />
       ) : (
         history![id].messages && (
           <ScrollArea className={`h-[90vh] w-full ${styles.scrollParent}`}>
