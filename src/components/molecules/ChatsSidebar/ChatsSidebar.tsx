@@ -35,7 +35,9 @@ export default function AppSidebar() {
       const { [item]: _, ...rest } = prev;
       return rest;
     });
-    router.replace("/chat/");
+    // router.replace("/chat/");
+    // cause a HARD refresh using browser api because on router.replace it doesnt cause an hard refresh and causes desync of ui and storage on deletion
+    window.location.href = "/";
   }
   return (
     <Sidebar variant="sidebar" collapsible="icon" className="h-full">
@@ -49,42 +51,51 @@ export default function AppSidebar() {
             Your Chats
           </SidebarGroupLabel>
           <SidebarMenu>
-            {Object.entries(history ?? {}).map(([item, val], i) => (
-              <SidebarMenuItem key={item}>
-                <ContextMenu>
-                  <ContextMenuTrigger>
-                    <SidebarMenuButton
-                      asChild
-                      className="flex justify-start translate-x-[2.5px] items-center"
+            {Object.entries(history ?? {}).length !== 0 ? (
+              Object.entries(history ?? {}).map(([item, val], i) => (
+                <SidebarMenuItem key={item}>
+                  <ContextMenu>
+                    <ContextMenuTrigger>
+                      <SidebarMenuButton
+                        asChild
+                        className="flex justify-start translate-x-[2.5px] items-center"
+                      >
+                        <Link
+                          href={`/chat/${item}`}
+                          className={styles.chatTitle}
+                        >
+                          <Minidenticon
+                            username={item}
+                            className="h-9 w-9 shrink-0 flex-0"
+                          />
+                          {open && (
+                            <span className="press-start-2p">{val.title}</span>
+                          )}
+                        </Link>
+                      </SidebarMenuButton>
+                    </ContextMenuTrigger>
+                    <ContextMenuContent
+                      className={`${styles.contextMenuItem} press-start-2p`}
                     >
-                      <Link href={`/chat/${item}`} className={styles.chatTitle}>
-                        <Minidenticon
-                          username={item}
-                          className="h-9 w-9 shrink-0 flex-0"
-                        />
-                        {open && (
-                          <span className="press-start-2p">{val.title}</span>
-                        )}
-                      </Link>
-                    </SidebarMenuButton>
-                  </ContextMenuTrigger>
-                  <ContextMenuContent
-                    className={`${styles.contextMenuItem} press-start-2p`}
-                  >
-                    <ContextMenuItem
-                      className="press-start-2p border-none outline-none"
-                      onSelect={() => deleteItem(item)}
-                    >
-                      Delete
-                    </ContextMenuItem>
-                  </ContextMenuContent>
-                </ContextMenu>
-              </SidebarMenuItem>
-            ))}
+                      <ContextMenuItem
+                        className="press-start-2p border-none outline-none"
+                        onSelect={() => deleteItem(item)}
+                      >
+                        Delete
+                      </ContextMenuItem>
+                    </ContextMenuContent>
+                  </ContextMenu>
+                </SidebarMenuItem>
+              ))
+            ) : (
+              <div className={styles.prompt}>
+                Maybe you should start a convo..
+              </div>
+            )}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
-      {/* <SidebarFooter> auth</SidebarFooter> */}
+      {/* TODO: <SidebarFooter> auth</SidebarFooter> */}
     </Sidebar>
   );
 }

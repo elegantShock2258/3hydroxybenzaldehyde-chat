@@ -8,7 +8,7 @@ export default function Page() {
   let router = useRouter();
   return (
     <div className={styles.parent}>
-      Hi There!
+      <div className={styles.title}> Hi There! </div>
       <button className={styles.button} onClick={() => router.push("/chat/")}>
         <Minidenticon
           className={styles.icon}
