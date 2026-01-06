@@ -23,6 +23,8 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
 
 export default function AppSidebar() {
   let { history, setHistory, clear } = useHistory()!;
@@ -45,8 +47,15 @@ export default function AppSidebar() {
       <SidebarContent className="h-full flex flex-col gap-3">
         <Separator />
         <SidebarGroup
-          className={`p-1 flex flex-col items-start gap-3 ${open && "p-4"}`}
+          className={`p-1 flex flex-col items-start w-full gap-3 ${open && "p-4"}`}
         >
+          <SidebarGroup
+            className={`press-start-2p text-white flex items-center justify-between w-full `}
+          >
+            {open && (
+              <Button onClick={() => router.push("/chat")}>New Chat</Button>
+            )}
+          </SidebarGroup>
           <SidebarGroupLabel className="text-lg press-start-2p">
             Your Chats
           </SidebarGroupLabel>
